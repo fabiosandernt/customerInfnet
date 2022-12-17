@@ -17,19 +17,19 @@ namespace Customer.Application.Cliente.Service
 
         public async Task<ClienteOutputDto> Criar(ClienteInputDto dto, Guid usuarioId)
         {
-            if (await _clienteRepository.AnyAsync(x => x.Cnpj
+            if (await _clienteRepository.AnyAsync(x => x.Cnpj.Valor
             == dto.Cnpj)) 
                 throw new Exception("Já existe um cliente cadastrado com o mesmo Cnpj");
 
             var cliente = this._mapper.Map<Customer.Domain.Cadastro.Cliente>(dto);
             cliente.UsuarioId = usuarioId;
-            cliente.Cnpj = dto.Cnpj;
+            cliente.Cnpj.Valor = dto.Cnpj;
             await this._clienteRepository.Save(cliente);
             return this._mapper.Map<ClienteOutputDto>(cliente);
         }
         public async Task<ClienteOutputDto> Deletar(ClienteInputDto dto, Guid usuarioId)
         {
-            if (await _clienteRepository.AnyAsync(x => x.Cnpj == dto.Cnpj))
+            if (await _clienteRepository.AnyAsync(x => x.Cnpj.Valor  == dto.Cnpj))
             {
                 var cliente = this._mapper.Map<Customer.Domain.Cadastro.Cliente>(dto);
                 cliente.UsuarioId = usuarioId;
@@ -45,7 +45,7 @@ namespace Customer.Application.Cliente.Service
 
         public async Task<ClienteOutputDto> Atualizar(ClienteInputDto dto, Guid usuarioId)
         {
-            if (await _clienteRepository.AnyAsync(x=>x.Cnpj == dto.Cnpj))
+            if (await _clienteRepository.AnyAsync(x=>x.Cnpj.Valor    == dto.Cnpj))
             {
                 var cliente = this._mapper.Map<Customer.Domain.Cadastro.Cliente>(dto);
                 cliente.UsuarioId = usuarioId;

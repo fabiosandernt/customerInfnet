@@ -1,6 +1,6 @@
 ﻿using Customer.CrossCutting.Entity;
 using Customer.Domain.Account;
-
+using Customer.Domain.Cadastro.ValueObject;
 
 namespace Customer.Domain.Cadastro
 {
@@ -9,7 +9,7 @@ namespace Customer.Domain.Cadastro
     {
         protected Cliente() { }
         public string Nome { get; set; }
-        public string Cnpj { get; set; }
+        public Cnpj Cnpj { get; set; }
         public IList<Contato> Contatos { get; set; }       
         public Guid UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
@@ -18,7 +18,7 @@ namespace Customer.Domain.Cadastro
         {
             Id = Guid.NewGuid();
             Nome = nome;
-            Cnpj = cnpj;
+            Cnpj.Valor = cnpj;
         }
 
     }

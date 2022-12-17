@@ -19,7 +19,7 @@ namespace Customer.Repository.Repository
 
         public async Task<IEnumerable<Cliente>> ObterTodosClientesPorCnpj(string cpf)
         {
-            return await this.Query.Where(x => x.Cnpj == cpf).ToListAsync();  
+            return await this.Query.Where(x => x.Cnpj.Valor == cpf).ToListAsync();  
         }
     }
 }

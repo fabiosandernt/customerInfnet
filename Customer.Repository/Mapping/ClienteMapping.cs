@@ -12,8 +12,11 @@ namespace Customer.Repository.Mapping
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.Nome).IsRequired();
-            builder.Property(x => x.Cnpj).IsRequired();
-                    
+            builder.OwnsOne(x => x.Cnpj, p =>
+                {
+                    p.Property(f => f.Valor).HasColumnName("Cnpj").IsRequired();
+                });
+
         }
     }
 }
